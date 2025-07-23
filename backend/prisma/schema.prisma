@@ -23,6 +23,11 @@ model Position {
   occupationCategory   String
   createdAt            DateTime
 
+  userId               Int
+  user                 User             @relation(fields: [userId], references: [id])
+
+  notifications Notification[]
+
   jobDescriptions      JobDescription[]
   additionalOffices    AdditionalOffice[]
 }
@@ -54,5 +59,16 @@ model User {
   role      Role
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  positions Position[]
 }
 
+model Notification {
+  id          Int      @id @default(autoincrement())
+  message     String
+  read        Boolean  @default(false)
+  jobId       Int
+  createdAt   DateTime @default(now())
+
+  job         Position @relation(fields: [jobId], references: [id])
+}

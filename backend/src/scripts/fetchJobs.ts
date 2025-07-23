@@ -101,6 +101,7 @@ async function main() {
         occupation,
         occupationCategory,
         createdAt: new Date(createdAt),
+        userId: 1
       },
     });
 
