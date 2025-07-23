@@ -3,7 +3,6 @@ A coding assignment from OneTeamAnywhere
 
 
 # Back-end programming assignment
-In a context of hypothetical job board project, please implement following user stories using nodeJS and Typescript or modern PHP:
 
 ### User Story 1
 As a job board moderator I would like to notified every time someone posts a job for a first time,  so I can properly flag it
