@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model JobPost {
+  id              Int      @id @default(autoincrement())
+  externalId      String?  @unique
+  source          JobSource @default(INTERNAL) // internal or external
+  title           String
+  company         String?   // subcompany
+  location        String?   // office
+  department      String?   // department
+  category        String?   // recruitingCategory
+  description     String    // HTML merged
+  employmentType  String?   // permanent, contract, etc.
+  seniority       String?   // junior, experienced, etc.
+  schedule        String?   // full-time, part-time
+  yearsOfExperience String? // "2-5"
+  keywords        String?   // comma-separated
+  occupation      String?   // taxonomy
+  occupationCategory String? // taxonomy
+  isPublished     Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+}
+
+enum JobSource {
+  INTERNAL
+  EXTERNAL
+}
+
