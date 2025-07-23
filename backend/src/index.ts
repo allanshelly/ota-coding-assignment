@@ -1,21 +1,28 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import { PrismaClient } from "@prisma/client";
-
+import dotenv from 'dotenv';
 dotenv.config();
 
-const app = express();
-const prisma = new PrismaClient();
+import express from 'express';
+import cors from 'cors';
+import authRoutes from './routes/auth';
+import jobRoutes from './routes/jobs';
 
+
+const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("OTA API is running 🚀");
+app.use('/api/auth', authRoutes);
+app.use('/api/jobs', jobRoutes);
+
+//error handling
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error('[Unhandled Error]', err.stack);
+  res.status(500).json({ error: 'Internal server error' });
 });
 
 const PORT = process.env.PORT || 3000;
+const JWT_SECRET = process.env.JWT_SECRET || 'fallbacksecret';
+
 app.listen(PORT, () => {
-  console.log(`Backend is running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

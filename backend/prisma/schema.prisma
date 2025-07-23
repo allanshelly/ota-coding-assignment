@@ -42,3 +42,17 @@ model AdditionalOffice {
   position   Position @relation(fields: [positionId], references: [id])
 }
 
+enum Role {
+  MODERATOR
+  JOBSEEKER
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  role      Role
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
