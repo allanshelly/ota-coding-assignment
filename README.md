@@ -16,7 +16,7 @@ As a job board moderator I would like to notified every time someone posts a job
 As a Job Seeker, I would like to go to a web page and see a list of external job offers from a  specific URL combined with posts directly posted on the job board.
 
 #### Conditions of Satisfaction:
-● External API Integration: The job board should automatically fetch job listings from this URL https://mrge-group-gmbh.jobs.personio.de/xml   
+● External API Integration: The job board should automatically fetch job listings from this [URL](https://mrge-group-gmbh.jobs.personio.de/xml )  
 ● Data Parsing and Display: Parse the data from the external source and display it in a user-friendly format on the job board. Each listing should at least include the job title,  description, and a link to the full job posting.
 
 # Expectations
