@@ -20,6 +20,6 @@ As a Job Seeker, I would like to go to a web page and see a list of external job
 
 # Expectations
 ● Your implementation should meet the conditions of satisfaction for each user story.  
-● Be prepared to share your screen and walk us through your code during the evaluation session. 
+● Be prepared to share your screen and walk us through your code during the evaluation session.   
 ● Be ready to explain your choice of packages, architectural / design decisions, and any  challenges you encountered.  
 ● Have a clear understanding of your code to confidently walk us through your  implementation.
