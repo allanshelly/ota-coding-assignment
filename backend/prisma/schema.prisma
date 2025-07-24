@@ -22,6 +22,7 @@ model Position {
   occupation         String
   occupationCategory String
   createdAt          DateTime
+  status             Status @default(PENDING)
 
   userId Int
   user   User @relation(fields: [userId], references: [id])
@@ -50,6 +51,12 @@ model AdditionalOffice {
 enum Role {
   MODERATOR
   JOBSEEKER
+}
+
+enum Status {
+  PENDING
+  APPROVED
+  SPAM
 }
 
 model User {

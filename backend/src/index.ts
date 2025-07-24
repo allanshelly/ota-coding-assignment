@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/jobs', jobRoutes);
-app.use('/notifications', notificationRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 //error handling
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

@@ -1,6 +1,6 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
-import { authenticate } from '../middleware/auth';
+import { authenticate, authorizeRoles } from '../middleware/auth';
 import type { AuthRequest } from '../middleware/auth';
 
 const router = express.Router();
@@ -35,6 +35,21 @@ router.patch('/:id/read', authenticate, async (req: AuthRequest, res) => {
     res.status(500).json({ error: 'Failed to update notification' });
   }
 });
+
+router.patch('/read-all', authenticate, authorizeRoles('MODERATOR'), async (req: AuthRequest, res) => {
+  try {
+    const modId = req.user!.id;
+    const updated = await prisma.notification.updateMany({
+      where: { modId, read: false },
+      data: { read: true },
+    });
+    res.json({ updatedCount: updated.count });
+  } catch (err) {
+    console.error('[PATCH /notifications/read-all] Error:', err);
+    res.status(500).json({ error: 'Failed to update notifications' });
+  }
+});
+
 
 
 export default router;
