@@ -8,28 +8,28 @@ datasource db {
 }
 
 model Position {
-  id                   Int              @id
-  subcompany           String
-  office               String              
-  department           String
-  recruitingCategory   String?
-  name                 String
-  employmentType       String
-  seniority            String
-  schedule             String
-  yearsOfExperience    String?
-  keywords             String?
-  occupation           String
-  occupationCategory   String
-  createdAt            DateTime
+  id                 Int      @id @default(autoincrement())
+  subcompany         String
+  office             String
+  department         String
+  recruitingCategory String?
+  name               String
+  employmentType     String
+  seniority          String
+  schedule           String
+  yearsOfExperience  String?
+  keywords           String?
+  occupation         String
+  occupationCategory String
+  createdAt          DateTime
 
-  userId               Int
-  user                 User             @relation(fields: [userId], references: [id])
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
 
   notifications Notification[]
 
-  jobDescriptions      JobDescription[]
-  additionalOffices    AdditionalOffice[]
+  jobDescriptions   JobDescription[]
+  additionalOffices AdditionalOffice[]
 }
 
 model JobDescription {
@@ -60,15 +60,19 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  positions Position[]
+  positions     Position[]
+  notifications Notification[] @relation(name: "ModNotifications")
 }
 
 model Notification {
-  id          Int      @id @default(autoincrement())
-  message     String
-  read        Boolean  @default(false)
-  jobId       Int
-  createdAt   DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  jobId     Int
+  createdAt DateTime @default(now())
+  modId     Int
 
-  job         Position @relation(fields: [jobId], references: [id])
+  job  Position @relation(fields: [jobId], references: [id])
+  user User     @relation(name: "ModNotifications", fields: [modId], references: [id])
 }
